@@ -466,7 +466,9 @@ class kind extends MainClass {
     //TODO N THE AST TREE
     class ast extends MainClass{
         public void ast (String contents){
-
+if(true){
+    int i = 1+1;
+}
         }
     }
 }//LINE 500!! :D
