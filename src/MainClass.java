@@ -1,10 +1,11 @@
+//TODO connect git to the right repo
 /**
  * Syntax Analyzer for COSC 455
  * by Wesley Lancaster
  * Submitted on 11/??/22
  * @ wlanca2@students.towson.edu
  *
- * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/ab.txt
+ * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/examples/ab.txt
  **/
 import java.io.File;
 import java.util.Scanner;
@@ -466,9 +467,7 @@ class kind extends MainClass {
     //TODO N THE AST TREE
     class ast extends MainClass{
         public void ast (String contents){
-if(true){
-    int i = 1+1;
-}
+
         }
     }
 }//LINE 500!! :D
