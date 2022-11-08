@@ -1,12 +1,10 @@
-//TODO 0 connect git to the right repo.
-//TODO 1 how do I ommit an empty line between lines? calling nextline() twice just breaks everything
+//TODO 1 how do I omit an empty line between lines? calling nextline() twice just breaks everything
 //TODO 3 I need to store the identifiers for future loops.
 
 //TODO 4 (1-6) in kind()
-//TODO 5 kind() can still be confused in specific circumstances, of the difference between and identifier and a keyword.
+//TODO 5 kind() can still be confused in specific circumstances, of the difference between and identifier and a keyword: refer to 'todo's'
 
-//TODO THE AST TREE
-
+//TODO 6 THE AST TREE
 
 /**
  * Syntax Analyzer for COSC 455
@@ -153,7 +151,7 @@ class kind extends MainClass {
         kind k = new kind();
         value v = new value();
 
-        //todo 5 (// can be tricked, figure out why)
+        //todo 1 ('//' can be tricked by "bad_syntax_2.txt" figure out why)
         if (lexeme.contains("//")) {
             v.value(lexeme, noError);
             System.out.print("\nkind is: Single comment: " + lexeme);
@@ -232,7 +230,7 @@ class kind extends MainClass {
             v.value(operator, noError);
         }
 
-        //todo 6 (>= returns an error when it shouldn't, figure out why)
+        //todo 2 (>= returns an error when it shouldn't, figure out why)
         if (lexeme.contains(":") || lexeme.contains("=")) {
             if(!lexeme.matches(":=")){
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN ':=' ?");
@@ -274,7 +272,7 @@ class kind extends MainClass {
             }
         }
 
-        //todo 1 fix me
+        //todo 3 (This needs to properly know the rules of a 'int' declaration, and all of the potential errors)
         else if (letter.contains("int") && !letter.contains("print")) { //reads keyword 'int'
             System.out.print("\nkind is keyword Declaration: " + letter);
 
@@ -292,7 +290,7 @@ class kind extends MainClass {
             //{} somehow loop through each item, and return its value, kind and position
             //if identifier = true and .next() is also an identifier and not an operator, return an error.
         }
-        //todo 2 fix me
+        //todo 4 (must know the proper rules of a 'bool' declaration, and all of the potential errors)
         else if (letter.contains("bool")) { //reads keyword
             System.out.print("\nkind is keyword: " + letter);
 
@@ -301,7 +299,7 @@ class kind extends MainClass {
                 System.exit(0);
             }
         }
-        //todo 3 fix me
+        //todo 5 (must know the proper rules of a 'if' declaration, and all of the potential errors)
         else if (letter.contains("if")) { //reads 'if' statement
             System.out.print("\nkind is keyword ConditionalStatement: " + letter);
 
@@ -358,7 +356,7 @@ class kind extends MainClass {
                 }
             }
         }
-        //todo 4 fix me
+        //todo 6 (must know the proper rules of a 'else' declaration, and all of the potential errors)
         else if (letter.contains("else")) {
             System.out.print("\nkind is keyword ConditionalStatement: " + letter);
 
@@ -375,7 +373,7 @@ class kind extends MainClass {
                 System.exit(0);
             }
         }
-        //todo 3 fix me
+        //todo 7 (must know the proper rules of a 'while' declaration, and all of the potential errors)
         else if (letter.contains("while")) { //while statements
             System.out.print("\nkind is keyword IterativeStatement: " + letter);
 
