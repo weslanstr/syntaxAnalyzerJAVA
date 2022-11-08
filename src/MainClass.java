@@ -1,11 +1,20 @@
-//TODO connect git to the right repo
+//TODO 0 connect git to the right repo.
+//TODO 1 how do I ommit an empty line between lines? calling nextline() twice just breaks everything
+//TODO 3 I need to store the identifiers for future loops.
+
+//TODO 4 (1-6) in kind()
+//TODO 5 kind() can still be confused in specific circumstances, of the difference between and identifier and a keyword.
+
+//TODO THE AST TREE
+
+
 /**
  * Syntax Analyzer for COSC 455
  * by Wesley Lancaster
- * Submitted on 11/??/22
+ * Submitted on 11/11/22
  * @ wlanca2@students.towson.edu
  *
- * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/examples/ab.txt
+ * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/euclid-error.txt
  **/
 import java.io.File;
 import java.util.Scanner;
@@ -18,7 +27,7 @@ public class MainClass {
                 |
                 * Syntax Analyzer for COSC 455
                 * by Wesley Lancaster
-                * Submitted on 11/10/22""");
+                * Submitted on 11/11/22""");
 
         Scanner fileName = new Scanner(System.in);
         System.out.println("\n|\nplease enter directory location of .txt file.....");
@@ -51,7 +60,6 @@ public class MainClass {
             boolean noError = true;
 
 //THE CORE LOOP---------------------------------------------------------------------------------------------------------
-            // TODO 1 how do I ommit an empty line between lines? calling nextline() twice just breaks everything
 while (sc.hasNextLine() && noError) {
     Scanner txt = new Scanner(text);
 
@@ -90,7 +98,7 @@ while (sc.hasNextLine() && noError) {
                     | end of text file
                     * Syntax Analyzer for COSC455
                     * by Wesley Lancaster
-                    * Submitted on 11/10/22""");
+                    * Submitted on 11/11/22""");
             sc.close();
 
         } catch (FileNotFoundException e) {
@@ -138,14 +146,14 @@ class value extends MainClass {
 
 //THE KIND METH---------------------------------------------------------------------------------------------------------
 class kind extends MainClass {
-    //TODO 3 I need to store the identifiers for future loops.
-    //TODO 4 this does not account for identifiers with names similar to keywords. like 'print' and 'printy'
+
     boolean noError = true;
 
     public Scanner kind(String lexeme, Scanner txt) {
         kind k = new kind();
         value v = new value();
 
+        //todo 5 (// can be tricked, figure out why)
         if (lexeme.contains("//")) {
             v.value(lexeme, noError);
             System.out.print("\nkind is: Single comment: " + lexeme);
@@ -224,6 +232,7 @@ class kind extends MainClass {
             v.value(operator, noError);
         }
 
+        //todo 6 (>= returns an error when it shouldn't, figure out why)
         if (lexeme.contains(":") || lexeme.contains("=")) {
             if(!lexeme.matches(":=")){
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN ':=' ?");
@@ -265,7 +274,7 @@ class kind extends MainClass {
             }
         }
 
-        //todo 3 fix me
+        //todo 1 fix me
         else if (letter.contains("int") && !letter.contains("print")) { //reads keyword 'int'
             System.out.print("\nkind is keyword Declaration: " + letter);
 
@@ -283,7 +292,7 @@ class kind extends MainClass {
             //{} somehow loop through each item, and return its value, kind and position
             //if identifier = true and .next() is also an identifier and not an operator, return an error.
         }
-        //todo 3 fix me
+        //todo 2 fix me
         else if (letter.contains("bool")) { //reads keyword
             System.out.print("\nkind is keyword: " + letter);
 
@@ -349,7 +358,7 @@ class kind extends MainClass {
                 }
             }
         }
-        //todo 3 fix me
+        //todo 4 fix me
         else if (letter.contains("else")) {
             System.out.print("\nkind is keyword ConditionalStatement: " + letter);
 
@@ -464,10 +473,9 @@ class kind extends MainClass {
         return txt;
     }
 
-    //TODO N THE AST TREE
     class ast extends MainClass{
         public void ast (String contents){
 
         }
     }
-}//LINE 500!! :D
+}

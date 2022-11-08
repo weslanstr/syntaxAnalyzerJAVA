@@ -1,0 +1,25 @@
+Wesley Lancaster
+
+dev specifications:
+
+IntelliJ IDEA 2022.3.2 (Community Edition)
+
+15 Oracle Open JDK version 15
+
+Compile using the following command:
+javac lexicalyzer.java
+
+Run using the following command
+javac lexicalyzer
+
+Program usage:
+the user will be prompter to enter the location of the file that user wants to be read.
+
+
+
+
+------------------------------------------------------------------------------------
+Basic Description:
+My program reads the text file into a scanner called sc().
+My CORE LOOP then has two while loops, which uses the scanner to iterate the .txt for each line, and each line for each lexeme.
+My code passes each lexeme read to .kind, .value, .position, and .next when necessary.
