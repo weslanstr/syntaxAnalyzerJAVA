@@ -1,4 +1,5 @@
  // This program should print the number 20.
+
 program Twenty2:
   int a;
   int b;

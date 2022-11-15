@@ -1,10 +1,13 @@
-//TODO 1 how do I omit an empty line between lines? calling nextline() twice just breaks everything
-//TODO 3 I need to store the identifiers for future loops.
+//TODO 3 I need to properly handle identifiers
 
 //TODO 4 (1-6) in kind()
 //TODO 5 kind() can still be confused in specific circumstances, of the difference between and identifier and a keyword: refer to 'todo's'
 
 //TODO 6 THE AST TREE
+
+//TODO end should not trigger exi(0).
+//TODO all files must start with 'program' but comments / white space may be present before it
+//TODO
 
 /**
  * Syntax Analyzer for COSC 455
@@ -12,7 +15,7 @@
  * Submitted on 11/11/22
  * @ wlanca2@students.towson.edu
  *
- * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/euclid-error.txt
+ * sample location: /Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/ab3.txt
  **/
 import java.io.File;
 import java.util.Scanner;
@@ -45,6 +48,8 @@ public class MainClass {
         try {
             Scanner sc = new Scanner(x);
             String text = sc.nextLine();
+
+
             System.out.print("|\nNext Line: " + text + "\nlength of this line is: " + text.length());
             String lexeme = " ";
 
@@ -53,24 +58,31 @@ public class MainClass {
             kind k = new kind();
             //value v = new value();
 
-            int i = 0;
-            int l = 1;
+            int i = 0; int l = 1;
             boolean noError = true;
 
 //THE CORE LOOP---------------------------------------------------------------------------------------------------------
-while (sc.hasNextLine() && noError) {
+
+//this first while is to iterate lines
+    while (sc.hasNextLine() && noError) {
     Scanner txt = new Scanner(text);
 
+    //this while loop is to skip empty lines:
+    while(text.length() == 0) {text = sc.nextLine();}
+
+        //this second while loop is to iterate lexemes in each line.
         while (txt.hasNext()) {
+
         lexeme = n.next(txt); //calls next lexeme
-        System.out.print("\nlexeme being read is: " + lexeme);
+        System.out.print("lexeme being read is: " + lexeme);
         i = text.indexOf(lexeme);
-        p.position(i, l); //returns current position of lexeme
+        p.position(i, l, lexeme); //returns current position of lexeme
         k.kind(lexeme, txt); //v.value(lexeme) is called inside the kind() class
         System.out.print("\n");
 
-        if (!txt.hasNext()) { //iterating to the next line
+        if (!txt.hasNext()) { //if no more lexemes, read to next line
             text = sc.nextLine();
+            System.out.print("|\n");
             System.out.print("|\nNext Line: " + text + "\nlength of this line is: " + text.length() + "\n");
             i = 0;
             l++;
@@ -115,8 +127,8 @@ class next extends MainClass {
 
 //THE POSITION METH-----------------------------------------------------------------------------------------------------
 class position extends MainClass {
-    public void position(int i, int l) {
-        System.out.println("\nline: "+l+ " position: " + i);
+    public void position(int i, int l, String lexeme) {
+        System.out.println("\nLine: "+l+ " Index: " + (i-=lexeme.length() -1));
     }
 }
 
@@ -156,7 +168,8 @@ class kind extends MainClass {
             v.value(lexeme, noError);
             System.out.print("\nkind is: Single comment: " + lexeme);
             while (txt.hasNext()) {
-                System.out.print(" " + txt.next());
+                //System.out.print(" " + txt.next());
+                txt.next();
             }
         }
 
@@ -214,23 +227,24 @@ class kind extends MainClass {
         operator = String.valueOf(stringBuilder4);
 
         if (letter != "") {
-            System.out.print("\nletter/s read: " + letter);
+            //System.out.print("\nletter/s read: " + letter);
             v.value(letter, noError);
         }
         if (number != "") {
-            System.out.print("\nnumber/s read: " + number);
+            //System.out.print("\nnumber/s read: " + number);
             v.value(number, noError);
         }
         if (symbol != "") {
-            System.out.print("\nsymbol/s read: " + symbol);
+            //System.out.print("\nsymbol/s read: " + symbol);
             v.value(symbol, noError);
         }
         if (operator != "") {
-            System.out.print("\noperator/s read: " + operator);
+            //System.out.print("\noperator/s read: " + operator);
             v.value(operator, noError);
         }
 
         //todo 2 (>= returns an error when it shouldn't, figure out why)
+        //it also throws an a
         if (lexeme.contains(":") || lexeme.contains("=")) {
             if(!lexeme.matches(":=")){
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN ':=' ?");
@@ -239,6 +253,10 @@ class kind extends MainClass {
             else if(lexeme.contains(":=")||lexeme.contains("=<")||lexeme.contains(">=")||lexeme.contains("!=")){
                 System.out.print("\nkind is RelationalOperator: " + lexeme);
             }
+
+            //TODO rewrite this.. its weird
+
+
         }
 
         else if (letter.contains("program")) {
@@ -477,3 +495,5 @@ class kind extends MainClass {
         }
     }
 }
+
+
