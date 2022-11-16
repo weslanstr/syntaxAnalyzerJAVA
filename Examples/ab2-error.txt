@@ -15,4 +15,4 @@ program Twenty:
     a := a * b    // a = -4
   od;
   print a * (a - b);    // -4 * (-4 - 1)  =  -4 * (-5)  =  20
-end
+;end
