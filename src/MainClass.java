@@ -279,23 +279,27 @@ class kind extends MainClass {
             System.exit(0);
         }
 
+        if(lexeme.matches(":")){
+            System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN ':='");
+            p.position(l, lexeme, txt);
+            System.exit(0);
+        }
+
         if(lexeme.contains("@")){
             System.out.print(" \nSYNTAX ERROR DETECTED, '@' IS ILLEGAL CHARACTER");
             p.position(l, lexeme, txt);
             System.exit(0);
         }
 
-        if (lexeme.contains("!")) {
-            if(letter.matches("!")){
+        if (lexeme.matches("!")) {
                 System.out.print(" \nSYNTAX ERROR DETECTED, '!' ILLEGAL CHARACTER USE");
                 p.position(l, lexeme, txt);
                 System.exit(0);
-            }
         }
 
 
         else if (letter.contains("program")) {
-            System.out.print("\nkind is keyword: " + letter);
+            //System.out.print("\nkind is keyword: " + letter);
             if(!letter.matches("program")){ //if int is misspelled
                 p.position(l, lexeme, txt);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'program' ?");
@@ -310,10 +314,10 @@ class kind extends MainClass {
                 System.exit(0);
             }
             if(letter.contains(":")){
-                System.out.print("\nidentifier: " + letter);
+                //System.out.print("\nidentifier: " + letter);
             }
             else if (!letter.contains(":")){
-                System.out.print("\nidentifier: " + letter);
+                //System.out.print("\nidentifier: " + letter);
                 if(txt.hasNext()){
                     letter = txt.next();
                 }
