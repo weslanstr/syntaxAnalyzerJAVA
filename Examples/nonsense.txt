@@ -1,7 +1,7 @@
-program lexicallyOk:
-   int a;
+program lexicallyOk :
+   intt a;
    int b;
-   a := 2;
+   a :== 2;
    b := 5;
    while (a != b) do not print else do
      int b;

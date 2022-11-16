@@ -1,4 +1,4 @@
-program Hiding:
+program Hiding :
    int a;
    int b;
    a := 2;

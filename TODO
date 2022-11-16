@@ -1,18 +1,15 @@
-/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/exclame.txt
+/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/euclid-error.txt
 
-Bad_syntax_1 : ; is missing after bool c.
+bad-syntax-2.txt : error in intt b.
 (DONE)
 
-Bad-syntax-2 : error in intt b.
+ab2-error.txt : There should not be a ; before end.
 (DONE)
 
-ab2-error : There should not be a ; before end.
+euclid-error.txt : There is an error in !== inside the while loop.
 (DONE)
 
-euclid-error : There is an error in !== inside the while loop.
-(DONE)
-
-hiding-error : missing ) in the condition of the while loop.
+hiding-error.txt : missing ) in the condition of the while loop.
 (DONE)
 
 print.txt
@@ -51,7 +48,7 @@ nonsense : *** is an error.
 
 
 
-bad-syntax-1.txt
+bad-syntax-1.txt : ; is missing after bool c.
 //TODO 1 if lexeme is not a keyword.. then it must be an id.. identify id's.. then apply rules to them
 //TODO 2 create an check for any statement that must end with ';'
 //TODO 3 I need to properly handle identifiers
