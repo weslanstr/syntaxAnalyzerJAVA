@@ -1,15 +1,18 @@
 /Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/euclid-error.txt
 
-bad-syntax-2.txt : error in intt b.
+
+
+RETURN TRUE:---------------------------------------------------------------------------------------------------------
+ab.txt
 (DONE)
 
-ab2-error.txt : There should not be a ; before end.
+if2.txt
 (DONE)
 
-euclid-error.txt : There is an error in !== inside the while loop.
+euclid.txt
 (DONE)
 
-hiding-error.txt : missing ) in the condition of the while loop.
+ab2.txt
 (DONE)
 
 print.txt
@@ -18,69 +21,63 @@ print.txt
 if.txt
 (DONE)
 
-if2.txt
-(DONE)
-
 hiding.txt
 (DONE)
 
-euclid.txt
-(DONE)
-
-ab.txt
-(DONE)
-
-ab1 : There is a missing end at the end of the input.
-(DONE)
-
-ab2.txt
-(DONE)
-
-ab3 : In line 5 there is a space between : and =.
+comment.txt - should end analysis immediately with success. No tokens should be returned.
 (DONE)
 
 ok.txt - contains all of the provided lexically-valid files combined. Should output 406 tokens of the various types.
 (DONE)
 
+
+
+RETURN FALSE:---------------------------------------------------------------------------------------------------------
+ab1.txt : There is a missing end at the end of the input.
+(DONE)
+
+ok.txt - contains all of the provided lexically-valid files combined. Should output 406 tokens of the various types.
+(DONE)
+
+ab3 : In line 5 there is a space between : and =.
+(DONE)
+
+bad-syntax-2.txt : error in intt b.
+(DONE)
+
+euclid-error.txt : There is an error in !== inside the while loop.
+(DONE)
+
+hiding-error.txt : missing ) in the condition of the while loop.
+(DONE)
+
 nonsense : *** is an error.
 (DONE)
 
+empty.txt - same as comment.txt in regard to how the analyzer should react as the input file immediately starts with the end fo the file.
 
 
 
+NEED WORK: ---------------------------------------------------------------------------------------------------------
 bad-syntax-1.txt : ; is missing after bool c.
+lexically-not-ok.txt - see readme under week 7 on Blackboard.
+ab2-error.txt : There should not be a ; before end.
+
 //TODO 1 if lexeme is not a keyword.. then it must be an id.. identify id's.. then apply rules to them
+if lexeme is not 'keyword' then it must be an id.. and SHOULD follow some syntax rules to be an id
+Identifiers can contain numbers and underscores, but can only start with a letter.
+
+
 //TODO 2 create an check for any statement that must end with ';'
-//TODO 3 I need to properly handle identifiers
-//TODO 4 how do i distinguish between 'int' 'intt' and 'in'?
-
-
 
 
 under.txt - should report a lexical error, as no type of token can start with a character of an underscore.
-            Identifiers can contain numbers and underscores, but can only start with a letter.
-//TODO 5 a file must be able to contain at LEAST 'program', and 'end'
-//TODO 6 all files must start with 'program' but comments / white space may be present before it
-
-
-
-
 exclame.txt - should report a lexical error for the first character.
-//TODO 7 look for characters in places they shouldn't be
-//TODO 8 How do i ensure my code calls an error if it doesn't contain 'program ******:'
+//TODO 3 characters like @ are completely illegal
+these two test fail for the same issue.. For some reason, reading an illegal character on the first line does not excecute the code
 
 
+//TODO 4 a file must be able to contain at LEAST 'program', and 'end'
+all files must start with 'program' but comments / white space may be present before it
 
-
-lexically-not-ok.txt - see readme under week 7 on Blackboard.
-//TODO 9 characters like @ are completely illegal
-
-
-
-
-//TODO 10 call position() only when we find an error
-
-
-
-
-//TODO 11 THE AST TREE
+//TODO 5 THE AST TREE

@@ -1,7 +1,7 @@
 /**
  * Syntax Analyzer for COSC 455
  * by Wesley Lancaster
- * Submitted on 11/15/22
+ * Submitted on 11/16/22
  * @ wlanca2@students.towson.edu
  **/
 import java.io.File;
@@ -15,7 +15,7 @@ public class MainClass {
                 |
                 * Syntax Analyzer for COSC 455
                 * by Wesley Lancaster
-                * Submitted on 11/15/22""");
+                * Submitted on 11/16/22""");
 
         Scanner fileName = new Scanner(System.in);
         System.out.println("\n|\nplease enter directory location of .txt file.....");
@@ -37,7 +37,7 @@ public class MainClass {
             String text = sc.nextLine();
 
 
-            System.out.print("|\nNext Line: " + text);
+            //System.out.print("|\nNext Line: " + text);
             // + "\nlength of this line is: " + text.length()
             String lexeme = " ";
 
@@ -73,7 +73,7 @@ public class MainClass {
             if (!txt.hasNext()) { //if no more lexemes, read to next line
                 text = sc.nextLine();
                 //System.out.print("|\n");
-                System.out.print("|\nNext Line: " + text + "\n");
+                //System.out.print("|\nNext Line: " + text + "\n");
                 // + text + "\nlength of this line is: " + text.length() +
                 i = 0;
                 l++;
@@ -99,10 +99,10 @@ public class MainClass {
     }
             System.out.print("""
                     |
-                    | end of text file
+                    |
                     * Syntax Analyzer for COSC455
                     * by Wesley Lancaster
-                    * Submitted on 11/15/22""");
+                    * Submitted on 11/16/22""");
             sc.close();
 
         } catch (FileNotFoundException e) {
@@ -151,8 +151,8 @@ class value extends MainClass {
 }
 
 //THE KIND METH---------------------------------------------------------------------------------------------------------
+//todo 1 lets make a big if statement.. to determine if a lexeme is an id
 class kind extends MainClass {
-
     boolean noError = true;
 
     public Scanner kind(String lexeme, Scanner txt, int l) {
@@ -222,22 +222,10 @@ class kind extends MainClass {
         symbol = String.valueOf(stringBuilder3);
         operator = String.valueOf(stringBuilder4);
 
-        if (letter != "") {
-            //System.out.print("\nletter/s read: " + letter);
-            //v.value(letter, noError);
-        }
-        if (number != "") {
-            //System.out.print("\nnumber/s read: " + number);
-            //v.value(number, noError);
-        }
-        if (symbol != "") {
-            //System.out.print("\nsymbol/s read: " + symbol);
-            //v.value(symbol, noError);
-        }
-        if (operator != "") {
-            //System.out.print("\noperator/s read: " + operator);
-            //v.value(operator, noError);
-        }
+        //if (letter != "") {System.out.print("\nletter/s read: " + letter); v.value(letter, noError);}
+        //if (number != "") {System.out.print("\nnumber/s read: " + number);v.value(number, noError);}
+        //if (symbol != "") {System.out.print("\nsymbol/s read: " + symbol); v.value(symbol, noError);}
+        //if (operator != "") {System.out.print("\noperator/s read: " + operator); v.value(operator, noError);}
 
         if (lexeme.contains("=") && lexeme.contains(":")) {
             //if(lexeme.contains(":=")){System.out.print("\nkind is RelationalOperator: " + lexeme);}
@@ -283,13 +271,6 @@ class kind extends MainClass {
             }
         }
 
-        if(lexeme.contains("_")){
-            System.out.print(" \nBAD TOKEN: " + lexeme);
-            System.out.print(" \nSYNTAX ERROR DETECTED, '_' IS ILLEGAL CHARACTER");
-            p.position(l, lexeme, txt);
-            System.exit(0);
-        }
-
         if(lexeme.contains("**")){
             System.out.print(" \nBAD TOKEN: " + lexeme);
             System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN '*'");
@@ -311,7 +292,7 @@ class kind extends MainClass {
             System.exit(0);
         }
 
-        if(lexeme.contains("_")){
+        if(lexeme.matches("_")){
             System.out.print(" \nBAD TOKEN: " + lexeme);
             System.out.print(" \nSYNTAX ERROR DETECTED, '_' IS ILLEGAL CHARACTER");
             p.position(l, lexeme, txt);
@@ -336,7 +317,7 @@ class kind extends MainClass {
             if(txt.hasNext()){
                 letter = txt.next();
             }
-            else{
+            else if (!txt.hasNext()){
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, PROGRAM MUST BE IDENTIFIED FOLLOWED BY ':' ");
                 p.position(l, lexeme, txt);
@@ -351,7 +332,7 @@ class kind extends MainClass {
                     letter = txt.next();
                 }
                 if(letter.contains(":")){
-                    System.out.print(letter);
+                    //System.out.print(letter);
                 }
                 else if(!letter.contains(":")){
                     System.out.print(" \nBAD TOKEN: " + lexeme);
@@ -362,7 +343,7 @@ class kind extends MainClass {
             }
         }
 
-        //todo 3 (This needs to properly know the rules of a 'int' declaration, and all of the potential errors)
+        //todo 2 (This needs to properly know the rules of a 'int' declaration, and all of the potential errors)
         else if (letter.contains("int") && !letter.contains("print")) { //reads keyword 'int'
             //System.out.print("\nkind is keyword Declaration: " + letter);
             if(!letter.matches("int")){ //if int is misspelled
@@ -384,7 +365,7 @@ class kind extends MainClass {
             //if identifier = true and .next() is also an identifier and not an operator, return an error.
         }
 
-        //todo 4 (must know the proper rules of a 'bool' declaration, and all of the potential errors)
+        //todo 3 (must know the proper rules of a 'bool' declaration, and all of the potential errors)
         else if (letter.contains("bool")) { //reads keyword
             //System.out.print("\nkind is keyword: " + letter);
             if (lexeme.matches("bool")) {}
@@ -396,7 +377,7 @@ class kind extends MainClass {
             }
         }
 
-        //todo 5 (must know the proper rules of a 'if' declaration, and all of the potential errors)
+        //todo 4 (must know the proper rules of a 'if' declaration, and all of the potential errors)
         else if (letter.contains("if")) { //reads 'if' statement
             //System.out.print("\nkind is keyword ConditionalStatement: " + letter);
 
@@ -429,9 +410,7 @@ class kind extends MainClass {
                 }
                 while(txt.hasNext()) {
 
-
                     //add stuff to this so contents are also lexilized
-
 
                     System.out.print(" " + letter + " ");
                     letter = txt.next();
@@ -452,9 +431,7 @@ class kind extends MainClass {
                 }
                 while(txt.hasNext()) {
 
-
                     //add stuff to this so contents are also lexilized
-
 
                     System.out.print(" " + letter + " ");
                     letter = txt.next();
@@ -462,7 +439,7 @@ class kind extends MainClass {
             }
         }
 
-        //todo 6 (must know the proper rules of a 'else' declaration, and all of the potential errors)
+        //todo 5 (must know the proper rules of a 'else' declaration, and all of the potential errors)
         else if (letter.contains("else")) {
             //System.out.print("\nkind is keyword ConditionalStatement: " + letter);
             if (lexeme.matches("else")) {}
@@ -631,13 +608,8 @@ class kind extends MainClass {
         else{
             //System.out.print("\nkind is Identifier: " + letter);
         }
-
         return txt;
     }
 
-    class ast extends MainClass{
-        public void ast (String contents){
-
-        }
-    }
+    class ast extends MainClass{    public void ast (String contents){}    }
 }
