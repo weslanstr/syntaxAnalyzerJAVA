@@ -1,4 +1,4 @@
-/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/euclid.txt
+/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/ab2.txt
 
 
 
@@ -54,27 +54,25 @@ hiding-error.txt : missing ) in the condition of the while loop.
 nonsense : *** is an error.
 (DONE)
 
-empty.txt - same as comment.txt in regard to how the analyzer should react as the input file immediately starts with the end fo the file.
+empty.txt - same as comment.txt in regard to how the analyzer should react as the input file immediately starts with the end of the file.
+(DONE)
 
+under.txt - should report a lexical error, as no type of token can start with a character of an underscore.
+(DONE)
+
+exclame.txt - should report a lexical error for the first character.
+(DONE)
 
 
 NEED WORK: ---------------------------------------------------------------------------------------------------------
-bad-syntax-1.txt : ; is missing after bool c.
-lexically-not-ok.txt - see readme under week 7 on Blackboard.
-ab2-error.txt : There should not be a ; before end.
-
 //TODO 1 if lexeme is not a keyword.. then it must be an id.. identify id's.. then apply rules to them
 if lexeme is not 'keyword' then it must be an id.. and SHOULD follow some syntax rules to be an id
 Identifiers can contain numbers and underscores, but can only start with a letter.
 
 
-//TODO 2 create an check for any statement that must end with ';'
-
-
-under.txt - should report a lexical error, as no type of token can start with a character of an underscore.
-exclame.txt - should report a lexical error for the first character.
-//TODO 3 characters like @ are completely illegal
-these two test fail for the same issue.. For some reason, reading an illegal character on the first line does not excecute the code
+bad-syntax-1.txt : ; is missing after bool c.
+ab2-error.txt : There should not be a ; before end.
+//TODO 2 create an check for any statement where the rules say it must end with ';'
 
 
 //TODO 4 a file must be able to contain at LEAST 'program', and 'end'
