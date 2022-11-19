@@ -1,6 +1,3 @@
-/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/ok.txt
-
-
 
 RETURN TRUE:---------------------------------------------------------------------------------------------------------
 ab1.txt
@@ -68,6 +65,15 @@ ab2-error.txt : There should not be a ; before end.
 
 
 NEED WORK: ---------------------------------------------------------------------------------------------------------
+//todo 0 utilize value again?
+//todo 1 actually determine if keyword or id
+//todo 6. proper rules of assigning an id
+
+//todo 2. proper rules of int
+//todo 3. proper rules of bool
+//todo 4. proper rules of if
+//todo 5. proper rules of else
+
 //TODO 1 rules for assigning an id
 
 bad-syntax-1.txt : ; is missing after bool c.
