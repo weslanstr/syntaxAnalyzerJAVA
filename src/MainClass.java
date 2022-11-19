@@ -45,7 +45,7 @@ public class MainClass {
             position p = new position();
             kind k = new kind();
             ast a = new ast();
-            //value v = new value();
+            value v = new value();
             int i = 0; int l = 1;
             //todo set up a if to set an error detection
             boolean noError = true;
@@ -104,7 +104,11 @@ public class MainClass {
         }
 
         if (!sc.hasNextLine()) { //internal to make sure the last line is called and ends with "end"
-            if (text.contains("end")) {}
+            if (text.contains("end")) {
+                p.position(l, lexeme, text);
+                System.out.print("kind is keyword program: end");
+                v.value(lexeme, noError);
+            }
             if(!text.matches("end")){
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'end' ?\n");
@@ -150,7 +154,7 @@ class position extends MainClass {
 class value extends MainClass {
     public void value(String lexeme, boolean noError) {
         boolean result = lexeme.matches("[0-9]+");
-        boolean symbol = lexeme.matches("[(,),{,},:,;]+");
+        boolean symbol = lexeme.matches("[(,),{,},:,;,=]+");
 
         if(noError) {
             if (result) {
@@ -249,12 +253,12 @@ class kind extends MainClass {
 
         //if (letter != "") {System.out.print(": " + letter); v.value(letter, noError);}
         if (number != "") {System.out.print("number/s read: " + number);v.value(number, noError);}
-        if (symbol != "") {System.out.print("symbol/s read: " + symbol); v.value(symbol, noError);}
+        if (symbol != "") {System.out.print("symbol/s read: " + symbol+"\n");v.value(number, noError);}
         if (operator != "") {System.out.print("operator/s read: " + operator); v.value(operator, noError);}
 
         if (lexeme.contains("=") && lexeme.contains(":")) {
             if(lexeme.matches(":=")){
-                System.out.print("kind is RelationalOperator: " + lexeme);
+                System.out.println("kind is RelationalOperator: " + lexeme);
                 v.value(lexeme, noError);
                 System.out.println(" ");
             }
@@ -268,7 +272,7 @@ class kind extends MainClass {
 
         else if (lexeme.contains("=") && lexeme.contains(">")) {
             if(lexeme.matches(">=")){
-                System.out.print("kind is RelationalOperator: " + lexeme);
+                System.out.println("kind is RelationalOperator: " + lexeme);
                 v.value(lexeme, noError);
                 System.out.println(" ");
             }
@@ -282,7 +286,7 @@ class kind extends MainClass {
 
         else if (lexeme.contains("=") && lexeme.contains("<")) {
             if(lexeme.matches("=<")){
-                System.out.print("kind is RelationalOperator: " + lexeme);
+                System.out.println("kind is RelationalOperator: " + lexeme);
                 v.value(lexeme, noError);
                 System.out.println(" ");
             }
@@ -296,7 +300,7 @@ class kind extends MainClass {
 
         else if (lexeme.contains("=") && lexeme.contains("!")) {
             if(lexeme.matches("!=")){
-                System.out.print("kind is RelationalOperator: " + lexeme);
+                System.out.println("kind is RelationalOperator: " + lexeme);
                 v.value(lexeme, noError);
                 System.out.println(" ");
             }
@@ -354,7 +358,7 @@ class kind extends MainClass {
         else if (letter.contains("program")) {
             System.out.print("kind is keyword: " + letter);
             v.value(lexeme, noError);
-            if(!letter.matches("program")){ //if int is misspelled
+            if(!letter.matches("program") || !number.isEmpty()){ //if int is misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'program' ?");
                 p.position(l, lexeme, text);
@@ -395,7 +399,7 @@ class kind extends MainClass {
         else if (letter.contains("int") && !letter.contains("print")) { //reads keyword 'int'
             System.out.print("kind is keyword Declaration: " + letter);
             v.value(lexeme, noError);
-            if(!letter.matches("int")){ //if int is misspelled
+            if(!letter.matches("int") || !number.isEmpty()){ //if int is misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'int' ?");
                 p.position(l, lexeme, text);
@@ -414,7 +418,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("bool")) {
+            else if(!letter.matches("bool") || !number.isEmpty()) {
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'bool' ?");
                 p.position(l, lexeme, text);
@@ -427,7 +431,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword: " + letter);
                 v.value(lexeme, noError);
             }
-                else if(!letter.matches("if")){ //misspell catcher
+                else if(!letter.matches("if") || !number.isEmpty()){ //misspell catcher
                     System.out.print(" \nBAD TOKEN: " + lexeme);
                     System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'if' ?");
                     p.position(l, lexeme, text);
@@ -439,7 +443,7 @@ class kind extends MainClass {
                     System.out.print("kind is keyword: " + letter);
                     v.value(lexeme, noError);
                 }
-                    else if(!letter.matches("not")){ //misspell catcher
+                    else if(!letter.matches("not") || !number.isEmpty()){ //misspell catcher
                         System.out.print(" \nBAD TOKEN: " + lexeme);
                         System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'not' ?");
                         p.position(l, lexeme, text);
@@ -449,7 +453,7 @@ class kind extends MainClass {
                     System.out.print(" " + letter + " ");
                     letter = txt.next();
                     if(letter.contains("then")){
-                        if(!letter.matches("then")){ //misspell catcher
+                        if(!letter.matches("then") || !number.isEmpty()){ //misspell catcher
                             System.out.print(" \nBAD TOKEN: " + lexeme);
                             System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'then' ?");
                             p.position(l, lexeme, text);
@@ -463,12 +467,12 @@ class kind extends MainClass {
                     letter = txt.next();
                 }
             }
-            else if(!letter.contains("not")){
-                while(!letter.contains("then")){
+            else if(!letter.contains("not") || !number.isEmpty()){
+                while(!letter.contains("then") || !number.isEmpty()){
                     System.out.print(" " + letter + " ");
                     letter = txt.next();
                     if(letter.contains("then")){
-                        if(!letter.matches("then")){ //misspell catcher
+                        if(!letter.matches("then") || !number.isEmpty()){ //misspell catcher
                             System.out.print(" \nBAD TOKEN: " + lexeme);
                             System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'then' ?");
                             p.position(l, lexeme, text);
@@ -489,7 +493,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword ConditionalStatement: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("else")){ //if misspelled
+            else if(!letter.matches("else") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'else' ?");
                 p.position(l, lexeme, text);
@@ -502,7 +506,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword ConditionalStatement: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("fi")){ //if misspelled
+            else if(!letter.matches("fi") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'fi' ?");
                 p.position(l, lexeme, text);
@@ -522,7 +526,7 @@ class kind extends MainClass {
                     p.position(l, lexeme, text);
                     System.exit(0);
             }
-                if (letter.equals("not")) {
+                if (letter.matches("not")) {
                     if (txt.hasNext()) {
                         letter = txt.next();
                     } else {
@@ -548,7 +552,7 @@ class kind extends MainClass {
                         System.exit(0);
                     }
                 }}
-            else if (!letter.matches("while")) { //if misspelled
+            else if (!letter.matches("while") || !number.isEmpty() || !symbol.isEmpty()) { //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'while' ?");
                 p.position(l, lexeme, text);
@@ -561,7 +565,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword IterativeStatement: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("do")){ //if misspelled
+            else if(!letter.matches("do") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'do' ?");
                 p.position(l, lexeme, text);
@@ -574,7 +578,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword IterativeStatement: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("od")){ //if misspelled
+            else if(!letter.matches("od") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'od' ?");
                 p.position(l, lexeme, text);
@@ -599,7 +603,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword BooleanLiteral: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("false")){ //if misspelled
+            else if(!letter.matches("false") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'false' ?");
                 p.position(l, lexeme, text);
@@ -612,7 +616,7 @@ class kind extends MainClass {
                 System.out.print("kind is keyword BooleanLiteral: " + letter);
                 v.value(lexeme, noError);
             }
-            else if(!letter.matches("true")){ //if misspelled
+            else if(!letter.matches("true") || !number.isEmpty()){ //if misspelled
                 System.out.print(" \nBAD TOKEN: " + lexeme);
                 System.out.print(" \nSYNTAX ERROR DETECTED, DID YOU MEAN 'true' ?");
                 p.position(l, lexeme, text);
@@ -625,9 +629,9 @@ class kind extends MainClass {
                 System.out.print("kind is keyword program: " + letter);
                 v.value(lexeme, noError);
             }
-            else if (!lexeme.matches("end")) {
+            else if (!lexeme.matches("end") || !number.isEmpty()) {
                 System.out.print(" \nBAD TOKEN: " + lexeme);
-                System.out.print(" \nSYNTAX ERROR DETECTED, THIS IS NOT END OF FILE");
+                System.out.print(" \nSYNTAX ERROR DETECTED");
                 p.position(l, lexeme, text);
                 System.exit(0);
             }
@@ -635,8 +639,6 @@ class kind extends MainClass {
 
         else if(lexeme.contains("//")){}
 
-        //if the string isn't any keyword.. then it must be an identifier!
-        //this
         else{
             System.out.print("\nIdentifier read: " + letter);
             v.value(lexeme, noError);
@@ -648,8 +650,4 @@ class kind extends MainClass {
 }
 
 //THE AST TREE METH-----------------------------------------------------------------------------------------------------
-class ast extends MainClass{
-    public void ast (String contents){
-
-    }
-}
+class ast extends MainClass{ public void ast (String contents){} }

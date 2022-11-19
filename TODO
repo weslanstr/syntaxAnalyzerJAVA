@@ -1,4 +1,4 @@
-/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/ab1.txt
+/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/ok.txt
 
 
 
@@ -63,19 +63,16 @@ under.txt - should report a lexical error, as no type of token can start with a 
 exclame.txt - should report a lexical error for the first character.
 (DONE)
 
+ab2-error.txt : There should not be a ; before end.
+(DONE)
+
 
 NEED WORK: ---------------------------------------------------------------------------------------------------------
-//TODO 1 if lexeme is not a keyword.. then it must be an id.. identify id's.. then apply rules to them
-if lexeme is not 'keyword' then it must be an id.. and SHOULD follow some syntax rules to be an id
-Identifiers can contain numbers and underscores, but can only start with a letter.
-
+//TODO 1 rules for assigning an id
 
 bad-syntax-1.txt : ; is missing after bool c.
-ab2-error.txt : There should not be a ; before end.
 //TODO 2 create an check for any statement where the rules say it must end with ';'
 
+//TODO 3 how do I save the state of identifiers?
 
-//TODO 4 a file must be able to contain at LEAST 'program', and 'end'
-all files must start with 'program' but comments / white space may be present before it
-
-//TODO 5 THE AST TREE
+//TODO  THE AST TREE
