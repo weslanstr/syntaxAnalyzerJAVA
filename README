@@ -10,7 +10,7 @@ Compile using the following command:
 javac lexicalyzer.java
 
 Run using the following command
-javac lexicalyzer
+javac MainClass
 
 Program usage:
 the user will be prompter to enter the location of the file that user wants to be read.

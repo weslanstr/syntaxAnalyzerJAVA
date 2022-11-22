@@ -1,5 +1,11 @@
+/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/under.txt
+
+
+
 
 RETURN TRUE:---------------------------------------------------------------------------------------------------------
+ab.txt
+
 ab1.txt
 (DONE)
 
@@ -30,25 +36,25 @@ ok.txt - contains all of the provided lexically-valid files combined. Should out
 
 
 RETURN FALSE:---------------------------------------------------------------------------------------------------------
-ab1.txt : There is a missing end at the end of the input.
+ab1.txt - There is a missing end at the end of the input.
 (DONE)
 
 ok.txt - contains all of the provided lexically-valid files combined. Should output 406 tokens of the various types.
 (DONE)
 
-ab3 : In line 5 there is a space between : and =.
+ab3 - In line 5 there is a space between : and =.
 (DONE)
 
-bad-syntax-2.txt : error in intt b.
+bad-syntax-2.txt - error in intt b.
 (DONE)
 
-euclid-error.txt : There is an error in !== inside the while loop.
+euclid-error.txt - There is an error in !== inside the while loop.
 (DONE)
 
-hiding-error.txt : missing ) in the condition of the while loop.
+hiding-error.txt - missing ) in the condition of the while loop.
 (DONE)
 
-nonsense : *** is an error.
+nonsense - *** is an error.
 (DONE)
 
 empty.txt - same as comment.txt in regard to how the analyzer should react as the input file immediately starts with the end of the file.
@@ -60,25 +66,54 @@ under.txt - should report a lexical error, as no type of token can start with a 
 exclame.txt - should report a lexical error for the first character.
 (DONE)
 
-ab2-error.txt : There should not be a ; before end.
+ab2-error.txt - There should not be a ; before end.
+(DONE)
+
+bad-syntax-1.txt - Bad symbol 'IDENTIFIER': expected ;
+(DONE)
+
+euclid-synlexerror.txt
+(DONE)
+
+euclid-lexsynerror.txt
 (DONE)
 
 
 NEED WORK: ---------------------------------------------------------------------------------------------------------
-//todo 0 utilize value again?
-//todo 1 actually determine if keyword or id
-//todo 6. proper rules of assigning an id
+test2.txt
+ab3.txt
+if3.txt
 
-//todo 2. proper rules of int
-//todo 3. proper rules of bool
-//todo 4. proper rules of if
-//todo 5. proper rules of else
-
-//TODO 1 rules for assigning an id
-
-bad-syntax-1.txt : ; is missing after bool c.
-//TODO 2 create an check for any statement where the rules say it must end with ';'
-
-//TODO 3 how do I save the state of identifiers?
+//todo 3. proper rules of else
 
 //TODO  THE AST TREE
+
+
+
+
+
+
+
+if(lexeme.contains("=")){
+                    while(!lexeme.contains(";")){
+                        if(txt.hasNext()){
+                            lexeme=txt.next();
+                            //todo why doesn't this break my while loop?
+                            if(lexeme.contains("*") || lexeme.contains("(") || lexeme.contains(")") || lexeme.contains("//")){
+                                break;
+                            }
+                            else{
+                                System.out.println("\nlexeme being read is: " + lexeme);
+                                p.position(l, lexeme, text); //returns current position of lexeme
+                                k.kind(lexeme, text, l, txt); //v.value(lexeme) is called inside the kind() class
+                                System.out.print(" ");
+                            }
+                        }
+                        else if(!txt.hasNext()){ //if int isn't given a name to initialize.
+                            System.out.print(" \nBAD TOKEN: " + lexeme);
+                            System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED ';'\n");
+                            p.position(l, lexeme, text);
+                            System.exit(0);
+                        }
+                    }
+                }
