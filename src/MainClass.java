@@ -21,17 +21,17 @@ public class MainClass {
                 * Submitted on 11/22/22""");
 
         Scanner fileName = new Scanner(System.in);
-        System.out.println("\n|\nplease enter directory location of .txt file.....");
+        System.out.println("\n|\nPLEASE ENTER DIRECTORY OF FILE.....");
         String name = fileName.nextLine();
-        System.out.print(".....path entered");
+        System.out.print(".....PATH ENTERED");
         fileName.close();
         File x = new File(name);
 
         if(x.exists()) {
-            System.out.print("....."+x.getName() +  " exists!" + "\n");
+            System.out.print("....."+x.getName() +  ".....EXIST" + "\n");
         }
         else {
-            System.out.println("......file does not exist");
+            System.out.println("......FILE DOES NOT EXIST");
         }
         System.out.println("|");
 
@@ -45,15 +45,36 @@ public class MainClass {
             int i = 0;
             int l = 1;
             boolean noError = true;
+            String lexeme = " ";
+            String text = " ";
 
             //if no more lexemes, read to next line
             if (!sc.hasNext() && !sc.hasNextLine()) {
                 System.out.print(" \nEMPTY FILE. NOTHING TO READ.");
                 System.exit(0);
             }
-            String text = sc.nextLine();
-            String lexeme = " ";
-            System.out.print("|\nNext Line: " + text + "\n\n");
+            if(sc.hasNextLine()){
+                text = sc.nextLine();
+                System.out.print("|\nNext Line: " + text + "\n\n");
+            }
+
+            //to check the code contains at least one instance of 'program'
+            Scanner sc2 = new Scanner(x);
+            String lexeme2 = " ";
+            while(!lexeme2.contains("program")){
+
+                if(sc2.hasNext()){
+                    lexeme2 = sc2.next();
+                }
+                if(lexeme2.contains("//")){
+                    break;
+                }
+                else if(!sc2.hasNext()){
+                    System.out.print(" \nBAD TOKEN: " + lexeme2);
+                    System.out.print(" \nSYNTAX ERROR DETECTED, MUST START WITH 'program'\n");
+                    System.exit(0);
+                }
+            }
 
             //this is if the file is only one line long.
             if(!sc.hasNextLine()){
@@ -61,8 +82,6 @@ public class MainClass {
                 while (txtSingle.hasNext()) {
                     lexeme = n.next(txtSingle); //calls next lexeme
                     System.out.println("\nlexeme being read is: " + lexeme);
-                    //i = text.indexOf(lexeme);
-                    //p.position(l, lexeme, text); //returns current position of lexeme
                     k.kind(lexeme, text, l, txtSingle); //v.value(lexeme) is called inside the kind() class
 
                     if (!txtSingle.hasNext()) { //if no more lexemes, read to next line
@@ -98,7 +117,6 @@ public class MainClass {
                 text = sc.nextLine();
                 System.out.print("|\n");
                 System.out.print("|\nNext Line: " + text + "\n\n");
-                // + text + "\nlength of this line is: " + text.length() +
                 i = 0;
                 l++;
             }
@@ -123,11 +141,13 @@ public class MainClass {
     }
             System.out.print("""
                     
-                    |
-                    |
-                    * Syntax Analyzer for COSC455
-                    * by Wesley Lancaster
-                    * Submitted on 11/22/22""");
+                    |                             
+                    |     THE CODE HAS PASSED     
+                    |                             
+                    * Syntax Analyzer for COSC455 
+                    * by Wesley Lancaster         
+                    * Submitted on 11/22/22
+                    |""");
             sc.close();
 
         } catch (FileNotFoundException e) {
@@ -701,4 +721,4 @@ class ast extends MainClass{
     public void ast (String contents){
 
     }
-}//line 700 :D
+}

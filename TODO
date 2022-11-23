@@ -1,4 +1,4 @@
-/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/test2.txt
+/Users/johnmetz/Desktop/cosc455/455JAVA/project2/Examples/under.txt
 
 
 
@@ -92,28 +92,164 @@ if3.txt
 
 
 
+while(lexeme2.contains("program"){
+
+    while (sc2.hasNextLine()) {
+        Scanner txt2 = new Scanner(text2);
+
+        while (txt2.hasNext()) {
+            if(lexeme2.contains("//"){
+            text2=sc2.nextLine();
+            }
+            else if(lexeme2.contains("program"){
+            break;
+            }
+            else if(!txt2.hasNext(){
+                System.out.print(" \nBAD TOKEN: " + lexeme);
+                System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED 'end'\n");
+                p.position(l, lexeme, text);
+                System.exit(0);
+            }
+        }
+
+}
 
 
-if(lexeme.contains("=")){
-                    while(!lexeme.contains(";")){
-                        if(txt.hasNext()){
-                            lexeme=txt.next();
-                            //todo why doesn't this break my while loop?
-                            if(lexeme.contains("*") || lexeme.contains("(") || lexeme.contains(")") || lexeme.contains("//")){
-                                break;
-                            }
-                            else{
-                                System.out.println("\nlexeme being read is: " + lexeme);
-                                p.position(l, lexeme, text); //returns current position of lexeme
-                                k.kind(lexeme, text, l, txt); //v.value(lexeme) is called inside the kind() class
-                                System.out.print(" ");
-                            }
+
+
+
+
+
+
+
+
+//THE CORE LOOP---------------------------------------------------------------------------------------------------------
+    while (sc2.hasNextLine()) {
+        Scanner txt2 = new Scanner(text2);
+
+        while (txt2.hasNext()) {
+
+            if (!txt.hasNext()) {
+                text2 = sc.nextLine();
+                System.out.print("|\n");
+                System.out.print("|\nNext Line: " + text + "\n\n");
+            }
+        }
+
+        //this checks the conditions end the last line
+        if (!sc.hasNextLine()) {
+            if (text.contains("end")) {
+                p.position(l, lexeme, text);
+                System.out.print("kind is keyword program: end");
+                v.value(lexeme, noError);
+            }
+
+            if(!text.matches("end")){
+                System.out.print(" \nBAD TOKEN: " + lexeme);
+                System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED 'end'?\n");
+                p.position(l, lexeme, text);
+                System.exit(0);
+            }
+        }
+        txt.close();
+    }
+            System.out.print("""
+
+                    |
+                    |
+                    * Syntax Analyzer for COSC455
+                    * by Wesley Lancaster
+                    * Submitted on 11/22/22""");
+            sc.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: file was not found (exception e)");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+            while(!lexeme2.contains("program")  || j <=10){
+                while (sc2.hasNextLine() && !lexeme2.contains("program")) {
+                    Scanner txt2 = new Scanner(text2);
+                    System.out.print("|\nNext Line: " + text2 + "\n");
+
+                    while (text2.length() == 0) {text2 = sc2.nextLine();}
+
+                    while (txt2.hasNext() && !lexeme2.contains("program")) {
+                        lexeme2 = txt2.next();
+                        System.out.println("lexeme: " + lexeme2);
+
+                        if(lexeme2.contains("//")){
+                            text2=sc2.nextLine();
+                            System.out.println(j);
+                            j++;
                         }
-                        else if(!txt.hasNext()){ //if int isn't given a name to initialize.
-                            System.out.print(" \nBAD TOKEN: " + lexeme);
-                            System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED ';'\n");
-                            p.position(l, lexeme, text);
+                        else if(lexeme2.contains("program")){
+                            break;
+                        }
+                        if(!txt2.hasNext()){
+                            System.out.print(" \nBAD TOKEN: " + lexeme2);
+                            System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED 'program'\n");
+                            p.position(l, lexeme2, text2);
                             System.exit(0);
                         }
                     }
                 }
+            }
+            sc2.close();
+
+
+
+
+
+
+
+             //this is to make sure a program starts with 'program'
+                        Scanner sc2 = new Scanner(x);
+                        String text2 = sc.nextLine();
+                        String lexeme2 = "";
+                        int j = 0;
+
+                        while(sc2.hasNextLine()){
+                            while (text2.length() == 0) {text2 = sc2.nextLine();}
+                            Scanner txt2 = new Scanner(text2);
+
+                            while(txt2.hasNext()){
+                                lexeme2 = txt2.next();
+                                System.out.print("|\nNext lexeme: " + text2 + "\n\n");
+
+                                if(lexeme2.contains("//")){
+                                    while(txt2.hasNext()){
+                                        text2 = sc2.nextLine();
+                                        System.out.print("|\n");
+                                        System.out.print("|\nNext Line: " + text2 + "\n\n");
+                                    }
+                                }
+                                else if(lexeme2.contains("program")){
+                                    break;
+                                }
+                                if (!txt2.hasNext()) { //if no more lexemes, read to next line
+                                    text2 = sc2.nextLine();
+                                    System.out.print("|\n");
+                                    System.out.print("|\nNext Line: " + text2 + "\n\n");
+                                }
+                            }
+                            if(!sc2.hasNextLine()){
+                                System.out.print(" \nBAD TOKEN: " + lexeme2);
+                                System.out.print(" \nSYNTAX ERROR DETECTED, EXPECTED 'program'\n");
+                                p.position(l, lexeme2, text2);
+                                System.exit(0);
+                            }
+                        }
+                        sc2.close();
